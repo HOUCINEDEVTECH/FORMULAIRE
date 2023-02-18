@@ -3,10 +3,11 @@ from tkcalendar import *
 from tkinter import ttk, messagebox
 import tkinter as tk
 import openpyxl,xlrd
-from openpyxl import workbook
+from openpyxl.workbook import Workbook
+
 import pathlib
 
-class FormulaireExcel:
+class FormulaireExcel :
     def __init__(self, root):
         self.root=root
         self.root.title("formulaire avec Excel")
@@ -33,7 +34,7 @@ class FormulaireExcel:
         text_confPassword= Label(frame1,text=" confirm Password ",font=( "Algerian",10,"bold") , bg= "blue" , fg="white").place ( x= 50 , y=260)
         self.ecri_confPasword= Entry( frame1, font=("time new roman", 15), bg= "White")
         self.ecri_confPasword.place( x= 180 , y= 260)
-        text_sexe= Label(frame1,text=" sexe ",font=( "Algerian",10,"bold") , bg= "blue" , fg="white").place ( x= 50 , y= 300 )
+        text_sexe= Label(frame1,text=" sex ",font=( "Algerian",10,"bold") , bg= "blue" , fg="white").place ( x= 50 , y= 300 )
         self.ecri_sex= ttk.Combobox(  frame1,state=" readonly",  font=("time new roman", 15))
         self.ecri_sex["values"] = (" Homme", "Femme")
         self.ecri_sex.set("Selection")
@@ -46,7 +47,23 @@ class FormulaireExcel:
 
         b1 = Button(frame1,text="Valider",font=( "new roman",15) , bg= "limegreen",bd= 5).place(x = 80 , y= 400, width= 150)
         b2 = Button(frame1,text="Reinitialiser",font=( "new roman",15) , bg= "limegreen",bd= 5).place(x =   300 , y= 400, width= 150)
-        
+
+        ####3 CRER UN FICHIER EXCEL
+        fichier = pathlib.Path( r"C:\Users\HOUCINE\tunisians-loves-programming\FORMILAIRE EXCEL\Base_Donne.xlsx")
+        if fichier.exists():
+            pass
+        else:
+            fichier = Workbook ()
+            sheet = fichier.active
+            sheet ["A1"] = "Prènom"
+            sheet["B1"] =  " Nom"
+            sheet["C1"] =  " E-mail"
+            sheet["D1"] = " Password "
+            sheet["E1"] = " sex "
+            sheet["F1"] = " Date de naissance"
+
+            fichier.save( r"C:\Users\HOUCINE\tunisians-loves-programming\FORMILAIRE EXCEL\Base_Donne.xlsx")
+
 
 
 root=tk.Tk()
