@@ -53,7 +53,7 @@ class FormulaireExcel :
         else:
             fichier = Workbook ()
             sheet = fichier.active
-            sheet ["A1"] = "Produit"
+            sheet["A1"] = "Produit"
             sheet["B1"] =  " SN"
             sheet["C1"] =  " Test"
             sheet["D1"] = "FAIL "
